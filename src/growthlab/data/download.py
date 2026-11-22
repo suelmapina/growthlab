@@ -45,7 +45,7 @@ def download(url: str, dest: Path) -> Path:
 
 
 def fetch_online_retail() -> Path:
-    """Online Retail II: UK online retailer transactions, Dec 2009 – Dec 2011."""
+    """Online Retail II: UK online retailer transactions, Dec 2009 to Dec 2011."""
     out = config.retailparquet
     if out.exists():
         print(f"✓ {out.name} ready")
@@ -56,7 +56,7 @@ def fetch_online_retail() -> Path:
         with zipfile.ZipFile(zpath) as z:
             z.extractall(config.rawdir)
 
-    print("  reading xlsx (both sheets, ~1M rows — takes a minute)…")
+    print("  reading xlsx (both sheets, ~1M rows, takes a minute)…")
     sheets = pd.read_excel(config.retailxlsx, sheet_name=None, dtype={"Invoice": str})
     df = pd.concat(sheets.values(), ignore_index=True)
     df = df.rename(

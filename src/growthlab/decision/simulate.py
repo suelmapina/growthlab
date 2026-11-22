@@ -4,7 +4,7 @@ No public dataset has both purchase histories and a randomised retention experim
 Online Retail customer (with their real CLV) is paired with a Criteo test-set user (with a
 predicted uplift *and* a real randomised outcome). Two pairings bracket the unknown truth:
 
-- independent: random pairing — value and persuadability are unrelated
+- independent: random pairing: value and persuadability are unrelated
 - aligned: the most active buyers are paired with the users most likely to respond anyway
 
 Policies are scored with the *transformed outcome* z = y · (t/p − (1−t)/(1−p)), whose
@@ -210,7 +210,7 @@ def main() -> None:
         table = summarise(sim)
         table.round(2).to_csv(reportdir / f"policies_{mode}.csv")
         summary[mode] = table.round(2).to_dict(orient="index")
-        print(f"— {mode} pairing —")
+        print(f"[{mode} pairing]")
         print(table.round(0).to_string(), "\n")
 
     costs = [0.5, 1, 2, 5, 10, 20, 50]

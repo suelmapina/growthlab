@@ -1,6 +1,6 @@
-# 🧪 GrowthLab — CLV & Causal Uplift Decision Engine
+# 🧪 GrowthLab: CLV & Causal Uplift Decision Engine
 
-> **TL;DR** — Targeting a retention incentive by *expected incremental profit*
+> **TL;DR:** Targeting a retention incentive by *expected incremental profit*
 > (margin × CLV × causal uplift − cost) earned **€21.5k** in simulation, versus **€11.9k** for
 > the classic "top 20 % by CLV" list, while contacting **half as many customers**. It is the only
 > policy that stays profitable as contact costs rise. Every number below was measured on
@@ -23,27 +23,27 @@ their behaviour** (causal uplift) to decide who should receive it.
 
 ## Approach
 
-1. **Probabilistic CLV** — BG/NBD (purchase frequency) + Gamma-Gamma (spend), with a temporal
+1. **Probabilistic CLV:** BG/NBD (purchase frequency) + Gamma-Gamma (spend), with a temporal
    calibration/holdout split. _Data: Online Retail II._
-2. **Causal uplift** — heterogeneous treatment effects (CATE) with meta-learners, evaluated with
+2. **Causal uplift:** heterogeneous treatment effects (CATE) with meta-learners, evaluated with
    Qini curves and top-k uplift. _Data: Criteo Uplift (randomized experiment)._
-3. **Decision engine** — expected incremental value = CLV × uplift − incentive cost.
-4. **Serving** — FastAPI `/decide-action` endpoint and a Streamlit demo.
+3. **Decision engine:** expected incremental value = CLV × uplift − incentive cost.
+4. **Serving:** FastAPI `/decide-action` endpoint and a Streamlit demo.
 
 ### A note on the data
 
 The two public datasets do not share customers: no public dataset contains both long purchase
-histories *and* a randomized retention experiment. Each module is therefore trained and evaluated
+histories *and* a randomized retention experiment. Each part is therefore trained and evaluated
 on its own dataset, and the decision engine is demonstrated on a documented simulation that
 combines the two. The assumptions behind that simulation are stated explicitly.
 
 ## Results
 
-### Module 1 — Probabilistic CLV ✅
+### 1. Customer value: probabilistic CLV
 
-**Setup.** 5,852 customers, 36,594 invoices (Dec 2009 – Dec 2011) after cleaning
+**Setup.** 5,852 customers, 36,594 invoices (Dec 2009 to Dec 2011) after cleaning
 ([cleaning log](reports/clv/cleaning_log.csv): cancellations, missing IDs, postage/fee lines and
-duplicates removed — 27 % of raw lines). Models are fitted on the calibration period
+duplicates removed; 27 % of raw lines). Models are fitted on the calibration period
 (until 2011-06-09) and evaluated on what customers *actually* did in the following 26 weeks.
 Baseline: each customer keeps buying at their historical rate, with no churn.
 
@@ -63,12 +63,12 @@ Baseline: each customer keeps buying at their historical rate, with no churn.
   buyers. The naive rate systematically overestimates loyal customers because it ignores churn.
 - **Revenue is under-predicted by 16 %.** Purchase counts are almost exact, so the gap comes from
   spend: the average order in the holdout was 10 % higher than in calibration (€499 vs €453,
-  driven by Aug–Oct 2011). Gamma-Gamma assumes spend per order is stable over time — a known
+  driven by Aug to Oct 2011). Gamma-Gamma assumes spend per order is stable over time, a known
   limitation for seasonal businesses. Its other assumption, that spend is independent of
   frequency, holds (correlation 0.08).
 - **For ranking, the gain over "past spend" is small** (+0.9 pp of revenue in the top 20 %).
   The value of the model here is not a better top-N list but *calibrated, per-customer
-  forecasts* — which is what the decision engine needs to turn uplift into expected profit.
+  forecasts*, which is what the decision engine needs to turn uplift into expected profit.
 
 **Known limitations**
 
@@ -78,15 +78,15 @@ Baseline: each customer keeps buying at their historical rate, with no churn.
   metrics in € are driven by a small number of customers.
 - No seasonality or covariates; a production version would add them or recalibrate monthly.
 
-Output: `data/processed/clv_scores.parquet` — per customer `p_alive`, expected purchases and
+Output: `data/processed/clv_scores.parquet`: per customer `p_alive`, expected purchases and
 spend, and 12-month discounted CLV, from models refitted on the full history.
 
-### Module 2 — Causal uplift ✅
+### 2. Causal uplift
 
 **Setup.** Criteo Uplift is a randomized experiment (85 % treated / 15 % control), so treated vs
 control outcomes within any group of customers are an unbiased estimate of the causal effect.
 Random 1M-row sample, 70/30 train/test split stratified by treatment × outcome.
-Outcome: **site visit** (conversions are too rare — 296 in the control group — to estimate
+Outcome: **site visit** (conversions are too rare, with 296 in the control group, to estimate
 individual effects). `exposure` is excluded from the features: it only exists after treatment,
 so using it would leak the outcome.
 
@@ -114,7 +114,7 @@ Average effect of the campaign on the test set: **+1.09 pp** visits (3.77 % → 
   +0.03, bootstrap 95 % CI −0.03 to +0.09).
 - **Where it matters, causal modelling wins.** For a tight budget (top 10 %), the X-learner's
   customers show **+1.5 pp more uplift** than the response model's
-  (95 % CI +0.4 to +2.6 pp) — about 30 % more incremental visits for the same spend.
+  (95 % CI +0.4 to +2.6 pp), about 30 % more incremental visits for the same spend.
 - **The T-learner is the weakest causal model**: it fits the control group (only 15 % of the
   data) on its own, so its difference of two noisy models is noisy. X- and DR-learners are
   designed for exactly this imbalance.
@@ -129,7 +129,7 @@ Average effect of the campaign on the test set: **+1.09 pp** visits (3.77 % → 
 | Sleeping Dogs | 22 % | 3.3 % | 3.3 % | −0.04 pp ± 0.4 |
 
 One honest finding: the "Sleeping Dogs" the model flags (predicted negative effect) show **no
-effect at all**, not a negative one — there is no evidence that this campaign drives anyone
+effect at all**, not a negative one: there is no evidence that this campaign drives anyone
 away. They should still not be targeted, since contacting them costs money and gains nothing.
 
 **Known limitations**
@@ -140,7 +140,7 @@ away. They should still not be targeted, since contacting them costs money and g
 - Criteo features are anonymised, so effects cannot be explained in business terms.
 - Results are on a 1M sample; `make data` fetches the full 14M rows.
 
-### Module 3 — Decision engine ✅
+### 3. Decision engine
 
 **The rule.** Send the incentive only when
 
@@ -152,13 +152,13 @@ with a 30 % gross margin and €5 per contacted customer (incentive + contact) a
 with a Criteo test-set user (predicted uplift *and* a real randomised outcome). Because the true
 relationship between value and persuadability is unknown, two pairings bracket it:
 
-- **independent** — value and persuadability are unrelated;
-- **aligned** — the most active buyers are also the most responsive users.
+- **independent:** value and persuadability are unrelated;
+- **aligned:** the most active buyers are also the most responsive users.
 
 Assumption: responding to the campaign retains the customer's 12-month CLV. CLV is capped at the
 99.5th percentile (€22.8k) so that a few wholesale accounts do not dominate the totals.
 
-**Honest evaluation.** Policies are *not* scored with the model's own uplift predictions —
+**Honest evaluation.** Policies are *not* scored with the model's own uplift predictions:
 that would reward a model for believing itself. Each targeted customer contributes
 margin × CLV × z − cost, where z = y·(t/p − (1−t)/(1−p)) is the *transformed outcome* of the
 paired Criteo user: its expectation equals the true individual uplift because treatment was
@@ -172,7 +172,7 @@ randomised. Results are averaged over 200 random pairings; differences are paire
 | Top 20 % by response model | 1,171 | €18.0k | −€3.5k ± 1.1k |
 | Top 20 % by predicted uplift | 1,171 | €18.0k | −€3.5k ± 0.4k |
 | Top 20 % by expected profit | 1,171 | €19.8k | −€1.7k ± 0.4k |
-| **GrowthLab: profit > 0** | **597** | **€21.5k** | — |
+| **GrowthLab: profit > 0** | **597** | **€21.5k** | |
 
 _± = one standard error of the mean over 200 pairings._
 
@@ -188,11 +188,11 @@ within noise of the response model (−€2.2k ± 2.0k). It still beats CLV-only
 - **Value alone is the wrong target.** Ranking by CLV contacts customers who would have stayed
   anyway; it earns about half of what GrowthLab earns under independent pairing.
 - **Fixed-size lists ignore economics.** "Top 20 %" contacts 1,171 customers whatever the cost.
-  The profit rule adapts — it contacts fewer people as costs rise and is the only policy that is
-  still profitable at €20–50 per contact.
+  The profit rule adapts: it contacts fewer people as costs rise and is the only policy that is
+  still profitable at €20 to €50 per contact.
 - **When value and persuadability coincide, simple rules catch up.** Under aligned pairing a
   response model is nearly as good. The causal + value combination matters most exactly when
-  the two signals disagree — which is the case to prepare for.
+  the two signals disagree, which is the case to prepare for.
 
 **Known limitations**
 
@@ -206,7 +206,7 @@ within noise of the response model (−€2.2k ± 2.0k). It still beats CLV-only
 - **API** (`make api`, docs at `/docs`): `POST /decide-action` scores a customer from their
   purchase history and campaign features and returns the action, expected profit, CLV,
   uplift and segment; `GET /customers/{id}` returns the precomputed decision. Single-request
-  latency is ~0.65 s, dominated by pymc-marketing's CLV computation — a production version
+  latency is ~0.65 s, dominated by pymc-marketing's CLV computation; a production version
   would cache the posterior means and evaluate the closed-form expressions in NumPy.
 - **Demo** (`make demo`): change margin, cost and pairing and see how each policy's profit
   and the per-customer decisions respond.
@@ -218,9 +218,9 @@ Requires [uv](https://docs.astral.sh/uv/).
 ```bash
 make install       # create .venv from uv.lock
 make data-sample   # Online Retail II + random 1M-row Criteo sample
-make clv           # Module 1: train, evaluate on holdout, score customers (~1 min)
-make uplift        # Module 2: fit and compare uplift models (~4 min)
-make decision      # Module 3: simulate policies, write decisions (seconds)
+make clv           # the customer-value model: train, evaluate on holdout, score customers (~1 min)
+make uplift        # the uplift model: fit and compare uplift models (~4 min)
+make decision      # the decision engine: simulate policies, write decisions (seconds)
 make test          # 26 tests, including API and demo end-to-end
 make demo          # interactive demo  ·  make api  ·  make mlflow
 ```
@@ -243,8 +243,8 @@ tests/
 
 ## Data sources & licences
 
-- **Online Retail II** — Chen, D. (2019), UCI Machine Learning Repository, CC BY 4.0.
-- **Criteo Uplift Prediction Dataset v2.1** — Diemert et al. (2018), Criteo AI Lab, CC BY-NC-SA 4.0.
+- **Online Retail II:** Chen, D. (2019), UCI Machine Learning Repository, CC BY 4.0.
+- **Criteo Uplift Prediction Dataset v2.1:** Diemert et al. (2018), Criteo AI Lab, CC BY-NC-SA 4.0.
 
 Data is downloaded by `make data` and is not redistributed in this repository.
 

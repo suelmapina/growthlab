@@ -25,9 +25,9 @@ display = {  # policy names as shown to a reader
     "Top 20% by response model": "Top 20% most likely to respond",
     "Top 20% by predicted uplift": "Top 20% by predicted uplift",
     "Top 20% by expected profit": "Top 20% by expected profit",
-    "GrowthLab: profit > 0": "GrowthLab — profit rule",
+    "GrowthLab: profit > 0": "GrowthLab: profit rule",
 }
-ours = "GrowthLab — profit rule"
+ours = "GrowthLab: profit rule"
 
 st.set_page_config(
     page_title="GrowthLab · Retention targeting", page_icon=":material/insights:", layout="wide"
@@ -184,7 +184,7 @@ k3.markdown(
 k4.markdown(
     kpi(
         "Return per € spent",
-        f"{growth['profit_mean'] / spend:,.1f}×" if spend else "—",
+        f"{growth['profit_mean'] / spend:,.1f}×" if spend else "n/a",
         f"on {money(spend)} of campaign cost",
     ),
     unsafe_allow_html=True,
@@ -299,7 +299,7 @@ with policies:
 
     st.caption(
         "Each policy is scored on what paired users of a randomised experiment actually did, "
-        "not on the model's own predictions — 200 simulated pairings per setting. Bars show the "
+        "not on the model's own predictions; 200 simulated pairings per setting. Bars show the "
         "95% interval of the expected profit."
     )
 
@@ -318,7 +318,7 @@ with customerstab:
         "Persuadables": "respond because of the offer",
         "Sure Things": "would have stayed anyway",
         "Lost Causes": "will not respond either way",
-        "Sleeping Dogs": "the offer does nothing — or harm",
+        "Sleeping Dogs": "the offer does nothing, or harm",
     }
     for col, name in zip(
         cols, ["Persuadables", "Sure Things", "Lost Causes", "Sleeping Dogs"], strict=True
@@ -444,7 +444,7 @@ with method:
             "In production, this would be measured with a randomised hold-out group.\n"
             "- **Seasonality is not modelled**, so revenue is under-forecast in the holiday "
             "quarter (−16% on the holdout).\n"
-            "- **Margin and cost are illustrative** — change them above."
+            "- **Margin and cost are illustrative**; change them above."
         )
     st.markdown(
         f"Code, full write-up and data sources: [{repourl.removeprefix('https://')}]({repourl}) · "

@@ -2,7 +2,7 @@
 
 Each `fit_*` returns a fitted, picklable model; `predict_uplift(name, model, x)` scores it.
 
-- response: classic targeting model — P(outcome | treated). Not causal; the baseline to beat.
+- response: classic targeting model, P(outcome | treated). Not causal; the baseline to beat.
 - slearner: one model with the treatment as a feature.
 - tlearner: separate models for treated and control.
 - xlearner / drlearner: econml meta-learners that correct for the 85/15 group imbalance.

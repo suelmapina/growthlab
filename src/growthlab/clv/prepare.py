@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-# Stock codes that are fees, postage or manual adjustments — not product purchases.
+# Stock codes that are fees, postage or manual adjustments, not product purchases.
 nonproductcodes = (
     r"POST|DOT|M|C2|D|S|B|CRUK|PADS|BANK CHARGES|AMAZONFEE|ADJUST\d*|TEST\d+|gift_\d+_\d+"
 )

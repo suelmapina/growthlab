@@ -25,7 +25,7 @@ upliftlabels = {
     "xlearner": "X-learner",
     "drlearner": "DR-learner",
 }
-upliftstyle = {  # (colour, linewidth, linestyle) — one highlight, everything else quieter
+upliftstyle = {  # (colour, linewidth, linestyle): one highlight, everything else quieter
     "random": (theme.mutedforeground, 1.0, (0, (4, 3))),
     "response": (theme.light, 1.6, "-"),
     "slearner": (theme.context, 1.4, "-"),
