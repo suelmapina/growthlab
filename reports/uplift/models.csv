@@ -1,0 +1,7 @@
+,qini_coefficient,uplift_top10,uplift_top30,fit_seconds
+random,0.00855,0.00986,0.01049,0.0
+response,0.34342,0.05174,0.0305,12.9
+slearner,0.3669,0.06162,0.03122,18.9
+tlearner,0.28759,0.05311,0.02914,19.4
+xlearner,0.37282,0.06747,0.03143,49.4
+drlearner,0.35367,0.06256,0.03145,88.6

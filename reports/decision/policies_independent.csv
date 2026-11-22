@@ -1,0 +1,8 @@
+,contacted,profit_mean,profit_se,vs_growthlab,vs_growthlab_se
+Contact nobody,0.0,0.0,0.0,-21500.23,1937.93
+Contact everyone,5852.0,-3350.49,2144.19,-24850.72,1139.57
+Top 20% by CLV,1171.0,11870.55,2092.39,-9629.68,1148.15
+Top 20% by response model,1171.0,18003.16,2108.08,-3497.07,1049.9
+Top 20% by predicted uplift,1171.0,18027.02,1897.11,-3473.21,444.59
+Top 20% by expected profit,1171.0,19758.71,1957.14,-1741.51,379.26
+GrowthLab: profit > 0,597.0,21500.23,1937.93,0.0,0.0

@@ -1,0 +1,39 @@
+{
+  "customers": 4941,
+  "repeat_customers": 3326,
+  "holdout_weeks": 26.1,
+  "frequency_spend_corr": 0.081,
+  "purchases": {
+    "bgnbd": {
+      "mae": 1.0430264005533783,
+      "rmse": 1.7900392301108203,
+      "total_error_pct": -0.025216392247544857,
+      "spearman": 0.62305419744644
+    },
+    "naive_rate": {
+      "mae": 1.0835422136852237,
+      "rmse": 1.9166880818041925,
+      "total_error_pct": 0.03669841492683576,
+      "spearman": 0.5750111175463704
+    }
+  },
+  "revenue": {
+    "bgnbd_gg": {
+      "mae": 576.4750660372097,
+      "rmse": 2609.0502520001833,
+      "total_error_pct": -0.16229307205757695,
+      "spearman": 0.6242443318196548
+    },
+    "naive_rate": {
+      "mae": 602.4290747343279,
+      "rmse": 3060.266913108934,
+      "total_error_pct": -0.20561307128537426,
+      "spearman": 0.584446779847516
+    }
+  },
+  "top20_revenue_captured": {
+    "bgnbd_gg": 0.7622389102778542,
+    "past_spend": 0.7535071228833349,
+    "oracle": 0.8561481016650937
+  }
+}

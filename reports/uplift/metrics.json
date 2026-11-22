@@ -1,0 +1,60 @@
+{
+  "outcome": "visit",
+  "train_rows": 700001,
+  "test_rows": 300001,
+  "ate": 0.01086214947272239,
+  "ate_se": 0.0009945711758300485,
+  "best_model": "xlearner",
+  "models": {
+    "random": {
+      "qini_coefficient": 0.0085458538751272,
+      "uplift_top10": 0.009857151171192596,
+      "uplift_top30": 0.010494323907648248,
+      "fit_seconds": 0.0
+    },
+    "response": {
+      "qini_coefficient": 0.3434151857956809,
+      "uplift_top10": 0.05173555796313739,
+      "uplift_top30": 0.03049953000230257,
+      "fit_seconds": 12.9
+    },
+    "slearner": {
+      "qini_coefficient": 0.3668963805235087,
+      "uplift_top10": 0.06162058690689892,
+      "uplift_top30": 0.031216253030238325,
+      "fit_seconds": 18.9
+    },
+    "tlearner": {
+      "qini_coefficient": 0.28759305794100126,
+      "uplift_top10": 0.05311336599288022,
+      "uplift_top30": 0.029135596648071735,
+      "fit_seconds": 19.4
+    },
+    "xlearner": {
+      "qini_coefficient": 0.3728236145579196,
+      "uplift_top10": 0.06747223236639974,
+      "uplift_top30": 0.03142667753044316,
+      "fit_seconds": 49.4
+    },
+    "drlearner": {
+      "qini_coefficient": 0.35366915862305853,
+      "uplift_top10": 0.06256463903776457,
+      "uplift_top30": 0.031445301742977105,
+      "fit_seconds": 88.6
+    }
+  },
+  "best_vs_response_bootstrap": {
+    "qini_coefficient": {
+      "diff": 0.029091309691351035,
+      "ci_low": -0.02855400254472981,
+      "ci_high": 0.09223654122552892,
+      "p_not_better": 0.195
+    },
+    "uplift_top10": {
+      "diff": 0.01512976156837467,
+      "ci_low": 0.004158703716541755,
+      "ci_high": 0.02617979941077777,
+      "p_not_better": 0.0
+    }
+  }
+}

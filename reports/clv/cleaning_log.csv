@@ -1,0 +1,7 @@
+step,rows
+raw line items,1067371
+with a customer id,824364
+not a cancellation (invoice 'C…'),805620
+positive quantity and price,805549
+product lines only (no postage/fees),802634
+exact duplicates removed,776579

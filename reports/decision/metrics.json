@@ -1,0 +1,108 @@
+{
+  "margin": 0.3,
+  "cost": 5.0,
+  "reps": 200,
+  "clv_cap": 22800.032677454044,
+  "independent": {
+    "Contact nobody": {
+      "contacted": 0.0,
+      "profit_mean": 0.0,
+      "profit_se": 0.0,
+      "vs_growthlab": -21500.23,
+      "vs_growthlab_se": 1937.93
+    },
+    "Contact everyone": {
+      "contacted": 5852.0,
+      "profit_mean": -3350.49,
+      "profit_se": 2144.19,
+      "vs_growthlab": -24850.72,
+      "vs_growthlab_se": 1139.57
+    },
+    "Top 20% by CLV": {
+      "contacted": 1171.0,
+      "profit_mean": 11870.55,
+      "profit_se": 2092.39,
+      "vs_growthlab": -9629.68,
+      "vs_growthlab_se": 1148.15
+    },
+    "Top 20% by response model": {
+      "contacted": 1171.0,
+      "profit_mean": 18003.16,
+      "profit_se": 2108.08,
+      "vs_growthlab": -3497.07,
+      "vs_growthlab_se": 1049.9
+    },
+    "Top 20% by predicted uplift": {
+      "contacted": 1171.0,
+      "profit_mean": 18027.02,
+      "profit_se": 1897.11,
+      "vs_growthlab": -3473.21,
+      "vs_growthlab_se": 444.59
+    },
+    "Top 20% by expected profit": {
+      "contacted": 1171.0,
+      "profit_mean": 19758.71,
+      "profit_se": 1957.14,
+      "vs_growthlab": -1741.51,
+      "vs_growthlab_se": 379.26
+    },
+    "GrowthLab: profit > 0": {
+      "contacted": 597.0,
+      "profit_mean": 21500.23,
+      "profit_se": 1937.93,
+      "vs_growthlab": 0.0,
+      "vs_growthlab_se": 0.0
+    }
+  },
+  "aligned": {
+    "Contact nobody": {
+      "contacted": 0.0,
+      "profit_mean": 0.0,
+      "profit_se": 0.0,
+      "vs_growthlab": -89025.33,
+      "vs_growthlab_se": 7046.69
+    },
+    "Contact everyone": {
+      "contacted": 5852.0,
+      "profit_mean": 64990.16,
+      "profit_se": 7061.61,
+      "vs_growthlab": -24035.17,
+      "vs_growthlab_se": 2060.96
+    },
+    "Top 20% by CLV": {
+      "contacted": 1171.0,
+      "profit_mean": 84248.9,
+      "profit_se": 7095.64,
+      "vs_growthlab": -4776.43,
+      "vs_growthlab_se": 2057.09
+    },
+    "Top 20% by response model": {
+      "contacted": 1171.0,
+      "profit_mean": 86776.43,
+      "profit_se": 7044.17,
+      "vs_growthlab": -2248.9,
+      "vs_growthlab_se": 2031.83
+    },
+    "Top 20% by predicted uplift": {
+      "contacted": 1171.0,
+      "profit_mean": 83225.18,
+      "profit_se": 7014.63,
+      "vs_growthlab": -5800.15,
+      "vs_growthlab_se": 1227.87
+    },
+    "Top 20% by expected profit": {
+      "contacted": 1171.0,
+      "profit_mean": 88912.6,
+      "profit_se": 7024.13,
+      "vs_growthlab": -112.72,
+      "vs_growthlab_se": 555.76
+    },
+    "GrowthLab: profit > 0": {
+      "contacted": 842.0,
+      "profit_mean": 89025.33,
+      "profit_se": 7046.69,
+      "vs_growthlab": 0.0,
+      "vs_growthlab_se": 0.0
+    }
+  }
+}
