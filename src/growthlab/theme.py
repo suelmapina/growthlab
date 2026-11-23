@@ -115,7 +115,9 @@ html, body, .stApp, .stMarkdown, button, input, textarea, [data-testid="stWidget
 }}
 #MainMenu, footer, [data-testid="stToolbar"], [data-testid="stDecoration"] {{ display: none; }}
 header[data-testid="stHeader"] {{ background: transparent; }}
-.block-container {{ max-width: 1180px; padding-top: 2.6rem; padding-bottom: 4rem; }}
+.block-container {{
+  max-width: 1480px; padding: 2.6rem clamp(1rem, 3vw, 3rem) 4rem clamp(1rem, 3vw, 3rem);
+}}
 
 .eyebrow {{
   font-family: '{mono}', monospace; font-size: 0.72rem; letter-spacing: 0.14em;
@@ -126,7 +128,7 @@ header[data-testid="stHeader"] {{ background: transparent; }}
   background: linear-gradient(135deg, {primary}, {secondary});
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }}
-.lede {{ color: {mutedforeground}; font-size: 1.05rem; line-height: 1.6; max-width: 780px; }}
+.lede {{ color: {mutedforeground}; font-size: 1.05rem; line-height: 1.6; max-width: 900px; }}
 .formula {{
   display: inline-block; font-family: '{mono}', monospace; font-size: 0.85rem;
   color: {foreground}; background: {card}; border: 1px solid {border};

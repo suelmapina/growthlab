@@ -1,5 +1,7 @@
 # 🧪 GrowthLab: CLV & Causal Uplift Decision Engine
 
+**[▶ Live demo](https://growthlab-suelmapina.streamlit.app/)** · try your own margin and contact cost
+
 > **TL;DR:** Targeting a retention incentive by *expected incremental profit*
 > (margin × CLV × causal uplift − cost) earned **€21.5k** in simulation, versus **€11.9k** for
 > the classic "top 20 % by CLV" list, while contacting **half as many customers**. It is the only
@@ -208,7 +210,7 @@ within noise of the response model (−€2.2k ± 2.0k). It still beats CLV-only
   uplift and segment; `GET /customers/{id}` returns the precomputed decision. Single-request
   latency is ~0.65 s, dominated by pymc-marketing's CLV computation; a production version
   would cache the posterior means and evaluate the closed-form expressions in NumPy.
-- **Demo** (`make demo`): change margin, cost and pairing and see how each policy's profit
+- **Demo** ([live](https://growthlab-suelmapina.streamlit.app/) or `make demo`): change margin, cost and pairing and see how each policy's profit
   and the per-customer decisions respond.
 
 ## Quickstart
