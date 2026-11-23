@@ -46,8 +46,8 @@ policies = {
 
 
 def load(model: str = "xlearner"):
-    clv = pd.read_parquet(config.processeddir / "clv_scores.parquet")
-    up = pd.read_parquet(config.processeddir / "uplift_scores.parquet")
+    clv = pd.read_parquet(config.datafile("clv_scores.parquet"))
+    up = pd.read_parquet(config.datafile("uplift_scores.parquet"))
     outcome = "visit" if "visit" in up.columns else "conversion"
     cap = float(clv["clv_12m"].quantile(clvcapquantile))
     customers = pd.DataFrame(

@@ -72,7 +72,7 @@ eurolabels = (
 @st.cache_data(show_spinner=False)
 def population():
     customers, pool, cap = simulate.load()
-    decisions = pd.read_parquet(simulate.decisionspath)
+    decisions = pd.read_parquet(config.datafile("decisions.parquet"))
     return customers, pool, cap, decisions
 
 

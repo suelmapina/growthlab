@@ -7,8 +7,16 @@ datadir = root / "data"
 rawdir = datadir / "raw"
 processeddir = datadir / "processed"
 modelsdir = root / "models"
+appdatadir = root / "app" / "data"  # small, committed copies of the results the demo needs
 
 seed = 42
+
+
+def datafile(name: str) -> Path:
+    """A result file from the local pipeline if it exists, else the committed demo copy."""
+    local = processeddir / name
+    return local if local.exists() else appdatadir / name
+
 
 # Online Retail II (UCI ML Repository, CC BY 4.0)
 retailurl = "https://archive.ics.uci.edu/static/public/502/online+retail+ii.zip"

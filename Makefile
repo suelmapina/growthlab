@@ -1,4 +1,4 @@
-.PHONY: help install data data-sample clv clv-mcmc uplift decision all figures api demo lint format test mlflow clean
+.PHONY: help install data data-sample clv clv-mcmc uplift decision all figures demo-data api demo lint format test mlflow clean
 
 help:  ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
@@ -25,6 +25,9 @@ decision:  ## Module 3: simulate targeting policies, write per-customer decision
 	uv run python -m growthlab.decision.simulate
 
 all: clv uplift decision  ## Run the full pipeline (value → uplift → decision)
+
+demo-data:  ## Copy the results the hosted demo needs into app/data
+	uv run python -m growthlab.exportdemo
 
 figures:  ## Re-render README figures from saved results (no retraining)
 	uv run python -m growthlab.figures

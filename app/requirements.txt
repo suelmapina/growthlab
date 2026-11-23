@@ -1,0 +1,9 @@
+# Demo-only dependencies for Streamlit Community Cloud.
+# Takes precedence over the root uv.lock because it sits next to the entry point,
+# so the hosted demo does not install the modelling stack (PyMC, EconML, MLflow).
+streamlit==1.67.0
+altair==6.3.0
+pandas==3.1.1
+numpy==2.4.6
+pyarrow==26.0.1
+matplotlib==3.11.2
